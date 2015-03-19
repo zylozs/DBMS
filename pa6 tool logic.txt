@@ -1,0 +1,28 @@
+- take in R
+- take in FDs
+- choose normal form
+
+3NF
+- calculate closure
+	- extract keys
+	- extract FDs
+- calculate set of primes
+- reduce given fds to minimal basis
+	- Reduce keys that have more than 1 attribute on right
+	- Find redundant keys and remove them
+- Create tables on revised FDs
+- Eliminate subsets
+	- compare tables with each other to determine if they are subsets
+	- remove them if they are
+- check to see if any of the tables is a key
+	- if no key, add a key as a new table
+	- if key is found, we are done
+	
+Chase Test
+- Create table/chart/thing from tables given from 3NF
+	- Enter the attributes each table has into the chart
+	- Fill in blanks with numbered letters based off index
+- Iterate through given FDs (can use either minimal or non minimal ones, it will work either way)
+	- perform modification based off the FD
+- Search table for a row that has all the original attributes for R
+- If this is found, it was decomposed properly, otherwise we screwed up 3NF!

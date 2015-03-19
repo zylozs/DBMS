@@ -78,10 +78,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChaseTest.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ThirdNF.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChaseTest.h" />
+    <ClInclude Include="ThirdNF.h" />
+    <ClInclude Include="FD.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="NormalForm.h" />
+    <ClInclude Include="Relation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
