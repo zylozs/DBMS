@@ -53,5 +53,8 @@
     <ClInclude Include="ChaseTest.h">
       <Filter>Header Files\Normalization</Filter>
     </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
