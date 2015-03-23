@@ -9,7 +9,7 @@
 class NormalForm
 {
 protected:
-	virtual bool testNormalization() = 0; // Returns true if its valid, false otherwise
+	virtual bool testNormalization(Relation* origRel, std::vector<Relation*> newRels, std::vector<FD*> fds) = 0; // Returns true if its valid, false otherwise
 
 public:
 	NormalForm() {}

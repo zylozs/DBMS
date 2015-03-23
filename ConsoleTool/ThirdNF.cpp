@@ -20,7 +20,57 @@ bool ThirdNF::testNormalization(Relation* origRel, std::vector<Relation*> newRel
 
 void ThirdNF::normalize(Relation* relation, std::vector<FD*> fds)
 {
+	std::vector<std::vector<char>*> permutations;
+	//!DELETE!//
+	std::vector<char>* attributes = parseAttributeStr(relation->attributes); 
+	//!DELETE!//
+	
+	//find the number of attributes in the relation
+	int relationLength = attributes->size();
 
+	//search for permutations
+	for (int i = 0; i < relationLength; ++i)
+	{
+		permutations.push_back(findPermutations(attributes, i + 1, 0, relationLength));
+	}
+
+	return;
+}
+
+//this function allocates memory!
+std::vector<char>* ThirdNF::parseAttributeStr(std::string attrs)
+{
+	//convert the attributes string into a dynamically allocated character pointer
+	char *relChars = (char*)attrs.c_str();
+	//convert the character pointer into a vector
+	std::vector<char>* attributes = new std::vector<char>;
+
+	int numAttributes = std::strlen(relChars);
+	for (int i = 0; i < numAttributes; ++i)
+	{
+		attributes->push_back(relChars[i]);
+	}
+
+	return attributes;
+}
+
+//this function allocates memory!
+std::vector<char>* ThirdNF::findPermutations(std::vector<char>* relation, int closureSize, int startIter, int relationSize)
+{
+	//!DELETE!//
+	std::vector<char>* permutation = new std::vector<char>;
+	//!DELETE!//
+	if (closureSize > 0)
+	{
+		for (int i = startIter; i < relationSize; ++i)
+		{
+			permutation->push_back(relation->at(i));
+			std::vector<char>* tmpPerm = findPermutations(relation, closureSize - 1, i + 1, relationSize);
+			permutation->insert(permutation->end(), tmpPerm->begin(), tmpPerm->end());
+			delete tmpPerm;//* this recursive function should manage its own memory
+		}
+	}
+	return permutation;
 }
 
 std::string ThirdNF::getResults()

@@ -5,12 +5,16 @@
 class ThirdNF : public NormalForm
 {
 protected:
-	virtual bool testNormalization(Relation* origRel, std::vector<Relation*> newRels, std::vector<FD*> fds); // Returns true if its valid, false otherwise
+	bool testNormalization(Relation* origRel, std::vector<Relation*> newRels, std::vector<FD*> fds); // Returns true if its valid, false otherwise
+
+private:
+	std::vector<char>* findPermutations(std::vector<char>* relation, int closureSize, int startIter, int relationSize);
+	std::vector<char>* parseAttributeStr(std::string attr);
 
 public:
 	ThirdNF();
 	~ThirdNF();
 
-	virtual void normalize(Relation* relation, std::vector<FD*> fds); // Starts the normalization algorithm defined by the derived class
-	virtual std::string getResults(); // Returns the formatted results as a string
+	void normalize(Relation* relation, std::vector<FD*> fds); // Starts the normalization algorithm defined by the derived class
+	std::string getResults(); // Returns the formatted results as a string
 };

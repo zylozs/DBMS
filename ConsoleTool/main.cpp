@@ -1,7 +1,8 @@
 #include "main.h"
 
 #include "ChaseTest.h"
-#include "Relation.h";
+#include "ThirdNF.h"
+#include "Relation.h"
 #include "FD.h"
 
 int main()
@@ -9,6 +10,7 @@ int main()
 	printf("Welcome to Kyle & Vince's DBMS Console Tool!\n");
 
 	ChaseTest test;
+	ThirdNF thirdNF;
 	Relation* origRel = new Relation("ABCDE");
 	std::vector<Relation*> newRels;
 	std::vector<FD*> fds;
@@ -21,6 +23,7 @@ int main()
 	fds.push_back(new FD("BC", "D"));
 	fds.push_back(new FD("AC", "E"));
 
+	thirdNF.normalize(origRel, fds);
 	test.testNormalization(origRel, newRels, fds);
 
 	system("pause");
