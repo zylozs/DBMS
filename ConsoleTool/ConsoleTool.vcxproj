@@ -80,10 +80,13 @@
   <ItemGroup>
     <ClCompile Include="ChaseTest.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NormalForm.cpp" />
     <ClCompile Include="ThirdNF.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChaseTest.h" />
+    <ClInclude Include="ClosureSet.h" />
+    <ClInclude Include="Permutation.h" />
     <ClInclude Include="ThirdNF.h" />
     <ClInclude Include="FD.h" />
     <ClInclude Include="main.h" />

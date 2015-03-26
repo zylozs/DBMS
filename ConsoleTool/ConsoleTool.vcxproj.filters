@@ -33,6 +33,9 @@
     <ClCompile Include="ChaseTest.cpp">
       <Filter>Source Files\Normalization</Filter>
     </ClCompile>
+    <ClCompile Include="NormalForm.cpp">
+      <Filter>Source Files\Normalization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -54,6 +57,12 @@
       <Filter>Header Files\Normalization</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Permutation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosureSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,9 +8,6 @@ protected:
 	bool testNormalization(Relation* origRel, std::vector<Relation*> newRels, std::vector<FD*> fds); // Returns true if its valid, false otherwise
 
 private:
-	std::vector<std::vector<char>*>* findPermutations(std::vector<char>* relation, int closureSize, int startIter, int relationSize);
-	std::vector<char>* parseAttributeStr(std::string attr);
-	std::vector<char>* detailPermutation(std::vector<char>* relation, int closureSize, int startIter, int relationSize);
 
 public:
 	ThirdNF();
