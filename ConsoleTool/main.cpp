@@ -23,6 +23,8 @@ int main()
 	fds.push_back(new FD("BC", "D"));
 	fds.push_back(new FD("AC", "E"));
 
+	//blah
+
 	thirdNF.normalize(origRel, fds);
 	test.testNormalization(origRel, newRels, fds);
 
