@@ -11,19 +11,17 @@ int main()
 
 	ChaseTest test;
 	ThirdNF thirdNF;
-	Relation* origRel = new Relation("ABCDE");
-	std::vector<Relation*> newRels;
-	std::vector<FD*> fds;
+	Relation origRel("ABCDE");
+	std::vector<Relation> newRels;
+	std::vector<FD> fds;
 
-	newRels.push_back(new Relation("AB"));
-	newRels.push_back(new Relation("BCD"));
-	newRels.push_back(new Relation("ACE"));
+	newRels.push_back(Relation("AB"));
+	newRels.push_back(Relation("BCD"));
+	newRels.push_back(Relation("ACE"));
 
-	fds.push_back(new FD("A", "B"));
-	fds.push_back(new FD("BC", "D"));
-	fds.push_back(new FD("AC", "E"));
-
-	//blah
+	fds.push_back(FD("A", "B"));
+	fds.push_back(FD("BC", "D"));
+	fds.push_back(FD("AC", "E"));
 
 	thirdNF.normalize(origRel, fds);
 	test.testNormalization(origRel, newRels, fds);

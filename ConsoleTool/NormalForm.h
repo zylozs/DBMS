@@ -11,13 +11,13 @@
 class NormalForm
 {
 protected:
-	virtual bool testNormalization(Relation origRel, std::vector<Relation> newRels, std::vector<FD> fds) = 0; // Returns true if its valid, false otherwise
+	virtual bool testNormalization(Relation origRel, const std::vector<Relation>& newRels, const std::vector<FD>& fds) = 0; // Returns true if its valid, false otherwise
 
 public:
 	NormalForm() {}
 	~NormalForm() {}
 
-	virtual void normalize(Relation relation, std::vector<FD> fds) = 0; // Starts the normalization algorithm defined by the derived class
+	virtual void normalize(Relation relation, const std::vector<FD>& fds) = 0; // Starts the normalization algorithm defined by the derived class
 	virtual std::string getResults() = 0; // Returns the formatted results as a string
 	ClosureSet findClosureSet(Relation rel, int closureSize);
 	ClosureSet findPermutations(Permutation prefix, Relation rel, int closureSize);

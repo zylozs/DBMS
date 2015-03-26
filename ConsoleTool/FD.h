@@ -12,4 +12,10 @@ struct FD
 		left = l;
 		right = r;
 	}
+
+	FD(const FD& copy)
+	{
+		left = copy.left;
+		right = copy.right;
+	}
 };
