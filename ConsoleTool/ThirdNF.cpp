@@ -20,7 +20,7 @@ bool ThirdNF::testNormalization(Relation* origRel, std::vector<Relation*> newRel
 
 void ThirdNF::normalize(Relation* relation, std::vector<FD*> fds)
 {
-	std::vector<std::vector<char>*> permutations;
+	std::vector<std::vector<std::vector<char>*>*>* permutations = new std::vector<std::vector<std::vector<char>*>*>;
 	//!DELETE!//
 	std::vector<char>* attributes = parseAttributeStr(relation->attributes); 
 	//!DELETE!//
@@ -31,7 +31,7 @@ void ThirdNF::normalize(Relation* relation, std::vector<FD*> fds)
 	//search for permutations
 	for (int i = 0; i < relationLength; ++i)
 	{
-		permutations.push_back(findPermutations(attributes, i + 1, 0, relationLength));
+		permutations->push_back(findPermutations(attributes, i + 1, 0, relationLength));
 	}
 
 	return;
@@ -55,21 +55,36 @@ std::vector<char>* ThirdNF::parseAttributeStr(std::string attrs)
 }
 
 //this function allocates memory!
-std::vector<char>* ThirdNF::findPermutations(std::vector<char>* relation, int closureSize, int startIter, int relationSize)
+std::vector<std::vector<char>*>* ThirdNF::findPermutations(std::vector<char>* relation, int closureSize, int startIter, int relationSize)
 {
 	//!DELETE!//
-	std::vector<char>* permutation = new std::vector<char>;
+	std::vector<std::vector<char>*>* permutations = new std::vector<std::vector<char>*>;
 	//!DELETE!//
 	if (closureSize > 0)
 	{
 		for (int i = startIter; i < relationSize; ++i)
 		{
-			permutation->push_back(relation->at(i));
-			std::vector<char>* tmpPerm = findPermutations(relation, closureSize - 1, i + 1, relationSize);
-			permutation->insert(permutation->end(), tmpPerm->begin(), tmpPerm->end());
-			delete tmpPerm;//* this recursive function should manage its own memory
+			for (int j = i + 1; j + closureSize < relationSize; ++j)
+			{
+				std::vector<char>* permutation = new std::vector<char>;
+				permutation->push_back(relation->at(i));
+				std::vector<char>* tmpPerm = detailPermutation(relation, closureSize - 1, j, relationSize);
+				permutation->insert(permutation->end(), tmpPerm->begin(), tmpPerm->end());
+				delete tmpPerm;
+				permutations->push_back(permutation);
+			}
 		}
 	}
+	return permutations;
+}
+
+std::vector<char>* ThirdNF::detailPermutation(std::vector<char>* relation, int closureSize, int startIter, int relationSize)
+{
+	std::vector<char>* permutation = new std::vector<char>;
+	permutation->push_back(relation->at(startIter));
+	std::vector<char>* tmpPerm = detailPermutation(relation, closureSize - 1, startIter + 1, relationSize);
+	permutation->insert(permutation->end(), tmpPerm->begin(), tmpPerm->end());
+	delete tmpPerm;
 	return permutation;
 }
 
