@@ -1,12 +1,23 @@
 #include "NormalForm.h"
+#include <iostream>
 
-ClosureSet* NormalForm::findClosureSet(ClosureSet* set, Relation* rel, int closureSize, int startIter)
+ClosureSet NormalForm::findClosureSet(Relation rel, int closureSize)
 {
-	//Closing if statement (prevents infinite recursion) [so we hope]
-	if (closureSize - startIter == 1)
+	return findPermutations(Permutation() , rel, closureSize);
+}
+
+ClosureSet NormalForm::findPermutations(Permutation prefix, Relation rel, int closureSize)
+{
+	Relation tmpRel = rel;
+	ClosureSet set;
+	if (closureSize == 0)
 	{
-		Permutation perm(rel->attributes[startIter]);
-		*set += perm;
+		set += prefix;
 		return set;
+	}
+
+	for each (char c in tmpRel.attributes)
+	{
+		set += findPermutations(prefix + Permutation(c), Relation(tmpRel.attributes.substr(1)), closureSize - 1);
 	}
 }
