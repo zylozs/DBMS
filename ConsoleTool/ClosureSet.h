@@ -8,6 +8,7 @@ public:
 	//Constructors/Destructors
 	ClosureSet(){};
 	ClosureSet(std::vector<Permutation> set){ closureSet = set; };
+	ClosureSet(Permutation perm){ closureSet.push_back(perm); };
 	~ClosureSet(){};
 	
 	//Utils
@@ -24,7 +25,8 @@ public:
 
 	void operator+=(ClosureSet set)
 	{
-		closureSet.insert(closureSet.end(), set.getPermutations().begin(), set.getPermutations().end());
+		std::vector<Permutation> tmpSet = set.getPermutations();
+		closureSet.insert(closureSet.end(), tmpSet.begin(), tmpSet.end());
 	}
 
 	ClosureSet operator+(Permutation perm)

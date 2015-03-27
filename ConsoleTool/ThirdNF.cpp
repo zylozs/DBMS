@@ -21,18 +21,18 @@ bool ThirdNF::testNormalization(Relation origRel, const std::vector<Relation>& n
 
 void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 {
-	std::vector<ClosureSet> ClosureSets;
+	std::vector<ClosureSet*> ClosureSets;
 
 	//find the number of attributes in the relation
 	int relationLength = relation.attributes.size();
 
 	//search for permutations
-	/*for (int i = 0; i < relationLength; ++i)
+	for (int i = 0; i < relationLength; ++i)
 	{
-		ClosureSet newSet;
-		findClosureSet(relation, i + 1);
+		ClosureSet* newSet;
+		newSet = findClosureSet(relation, i + 1);
 		ClosureSets.push_back(newSet);
-	}*/
+	}
 
 	std::vector<FD> newFds;
 	std::vector<Relation> relations;
@@ -113,7 +113,7 @@ void ThirdNF::createRelationsFromMinimalBasis(const std::vector<FD>& fds, std::v
 void ThirdNF::eliminateSubsetRelations(std::vector<Relation>& rels)
 {
 	// Find the relations that are subsets of other relations and delete them
-	for (unsigned int i; i < rels.size(); i++)
+	for (unsigned int i = 0; i < rels.size(); i++)
 	{
 		for (unsigned int j = 0; j < rels.size(); j++)
 		{

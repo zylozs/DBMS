@@ -1,23 +1,27 @@
 #include "NormalForm.h"
 #include <iostream>
 
-ClosureSet NormalForm::findClosureSet(Relation rel, int closureSize)
+ClosureSet* NormalForm::findClosureSet(Relation rel, int closureSize)
 {
 	return findPermutations(Permutation() , rel, closureSize);
 }
 
-ClosureSet NormalForm::findPermutations(Permutation prefix, Relation rel, int closureSize)
+ClosureSet* NormalForm::findPermutations(Permutation prefix, Relation rel, int closureSize)
 {
-	Relation tmpRel = rel;
-	ClosureSet set;
 	if (closureSize == 0)
 	{
-		set += prefix;
-		return set;
+		return new ClosureSet(prefix);
 	}
 
-	for each (char c in tmpRel.attributes)
+	ClosureSet set;
+	Relation tmpRel = rel;
+	for each (char c in rel.attributes)
 	{
-		set += findPermutations(prefix + Permutation(c), Relation(tmpRel.attributes.substr(1)), closureSize - 1);
+		tmpRel = Relation(tmpRel.attributes.substr(1));
+		ClosureSet* tmpSet = findPermutations(prefix + Permutation(c), tmpRel, closureSize - 1);
+		set += *tmpSet;
+		delete tmpSet;
 	}
+
+	return new ClosureSet(set);
 }

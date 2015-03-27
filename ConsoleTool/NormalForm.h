@@ -19,6 +19,6 @@ public:
 
 	virtual void normalize(Relation relation, const std::vector<FD>& fds) = 0; // Starts the normalization algorithm defined by the derived class
 	virtual std::string getResults() = 0; // Returns the formatted results as a string
-	ClosureSet findClosureSet(Relation rel, int closureSize);
-	ClosureSet findPermutations(Permutation prefix, Relation rel, int closureSize);
+	ClosureSet* findClosureSet(Relation rel, int closureSize);
+	ClosureSet* findPermutations(Permutation prefix, Relation rel, int closureSize);
 };
