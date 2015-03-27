@@ -27,12 +27,12 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	int relationLength = relation.attributes.size();
 
 	//search for permutations
-	for (int i = 0; i < relationLength; ++i)
+	/*for (int i = 0; i < relationLength; ++i)
 	{
 		ClosureSet newSet;
 		findClosureSet(newSet, relation, i + 1, 0);
 		ClosureSets.push_back(newSet);
-	}
+	}*/
 
 	std::vector<FD> newFds;
 
@@ -46,16 +46,43 @@ std::string ThirdNF::getResults()
 
 void ThirdNF::getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& newFds)
 {
-	for (int i = 0; i < oldFds.size(); i++)
+	// Add all the oldFds to the newFds and make sure the right hand side only has 1 value
+	for (unsigned int i = 0; i < oldFds.size(); i++)
 	{
 		if (oldFds[i].right.size() == 1)
 			newFds.push_back(FD(oldFds[i]));
 		else
 		{
-			for (int j = 0; j < oldFds[i].right.size(); j++)
+			for (unsigned int j = 0; j < oldFds[i].right.size(); j++)
 			{
 				newFds.push_back(FD(oldFds[i].left, Utils::convertToString<char>(oldFds[i].right[j])));
 			}
+		}
+	}
+
+	// Remove all trivial FDs (where something determines itself)
+	std::vector<FD>::iterator it = newFds.begin();
+
+	for (it; it != newFds.end(); it++)
+	{
+		if (Utils::stringContains(it->left, it->right))
+		{
+			it = newFds.erase(it);
+		}
+	}
+
+	// Remove redundant FDs
+	std::string rightSide = "";
+
+	for (it = newFds.begin(); it != newFds.end(); it++)
+	{
+		if (Utils::stringContains(rightSide, it->right))
+		{
+			it = newFds.erase(it);
+		}
+		else
+		{
+			rightSide += it->right;
 		}
 	}
 }
