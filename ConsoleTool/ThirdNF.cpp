@@ -41,7 +41,13 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	getMinimalBasis(fds, newFds);
 	createRelationsFromMinimalBasis(newFds, relations);
 	eliminateSubsetRelations(relations);
-	checkRelationsForKey(relations, keys);
+	
+	// If none of the relations contain a key in their schema, we will add a new relation that does
+	if (!checkIfRelationsContainKey(relations, keys))
+	{
+		Relation rel(keys[0].left);
+		relations.push_back(rel);
+	}
 }
 
 std::string ThirdNF::getResults()
@@ -126,7 +132,18 @@ void ThirdNF::eliminateSubsetRelations(std::vector<Relation>& rels)
 	}
 }
 
-void ThirdNF::checkRelationsForKey(std::vector<Relation>& rels, const std::vector<FD>& keys)
+bool ThirdNF::checkIfRelationsContainKey(std::vector<Relation>& rels, const std::vector<FD>& keys)
 {
+	for (unsigned int i = 0; i < rels.size(); i++)
+	{
+		for (unsigned int j = 0; j < keys.size(); j++)
+		{
+			if (Utils::stringContains(rels[i].attributes, keys[j].left))
+			{
+				return true;
+			}
+		}
+	}
 
+	return false;
 }

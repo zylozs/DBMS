@@ -11,7 +11,7 @@ private:
 	void getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& newFds);
 	void createRelationsFromMinimalBasis(const std::vector<FD>& fds, std::vector<Relation>& rels);
 	void eliminateSubsetRelations(std::vector<Relation>& rels);
-	void checkRelationsForKey(std::vector<Relation>& rels, const std::vector<FD>& keys);
+	bool checkIfRelationsContainKey(std::vector<Relation>& rels, const std::vector<FD>& keys);
 
 public:
 	ThirdNF();
