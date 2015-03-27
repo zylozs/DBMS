@@ -21,8 +21,6 @@ bool ThirdNF::testNormalization(Relation origRel, const std::vector<Relation>& n
 
 void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 {
-	std::vector<ClosureSet*> ClosureSets;
-
 	//find the number of attributes in the relation
 	int relationLength = relation.attributes.size();
 
@@ -31,22 +29,18 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	{
 		ClosureSet* newSet;
 		newSet = findClosureSet(relation, i + 1);
-		ClosureSets.push_back(newSet);
+		m_ClosureSets.push_back(newSet);
 	}
 
-	std::vector<FD> newFds;
-	std::vector<Relation> relations;
-	std::vector<FD> keys;
-
-	getMinimalBasis(fds, newFds);
-	createRelationsFromMinimalBasis(newFds, relations);
-	eliminateSubsetRelations(relations);
+	getMinimalBasis(fds, m_NewFds);
+	createRelationsFromMinimalBasis(m_NewFds, m_NewRelations);
+	eliminateSubsetRelations(m_NewRelations);
 	
 	// If none of the relations contain a key in their schema, we will add a new relation that does
-	if (!checkIfRelationsContainKey(relations, keys))
+	if (!checkIfRelationsContainKey(m_NewRelations, m_Keys))
 	{
-		Relation rel(keys[0].left);
-		relations.push_back(rel);
+		Relation rel(m_Keys[0].left);
+		m_NewRelations.push_back(rel);
 	}
 }
 

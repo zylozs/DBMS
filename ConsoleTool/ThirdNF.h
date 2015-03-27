@@ -8,6 +8,12 @@ protected:
 	bool testNormalization(Relation origRel, const std::vector<Relation>& newRels, const std::vector<FD>& fds); // Returns true if its valid, false otherwise
 
 private:
+	std::vector<ClosureSet*> m_ClosureSets;
+	std::vector<FD> m_NewFds;
+	std::vector<FD> m_ClosureFDs;
+	std::vector<Relation> m_NewRelations;
+	std::vector<FD> m_Keys;
+
 	void getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& newFds);
 	void createRelationsFromMinimalBasis(const std::vector<FD>& fds, std::vector<Relation>& rels);
 	void eliminateSubsetRelations(std::vector<Relation>& rels);
