@@ -30,7 +30,7 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	/*for (int i = 0; i < relationLength; ++i)
 	{
 		ClosureSet newSet;
-		findClosureSet(newSet, relation, i + 1, 0);
+		findClosureSet(relation, i + 1);
 		ClosureSets.push_back(newSet);
 	}*/
 
