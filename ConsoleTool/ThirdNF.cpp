@@ -35,8 +35,13 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	}*/
 
 	std::vector<FD> newFds;
+	std::vector<Relation> relations;
+	std::vector<FD> keys;
 
 	getMinimalBasis(fds, newFds);
+	createRelationsFromMinimalBasis(newFds, relations);
+	eliminateSubsetRelations(relations);
+	checkRelationsForKey(relations, keys);
 }
 
 std::string ThirdNF::getResults()
@@ -85,4 +90,43 @@ void ThirdNF::getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& ne
 			rightSide += it->right;
 		}
 	}
+}
+
+void ThirdNF::createRelationsFromMinimalBasis(const std::vector<FD>& fds, std::vector<Relation>& rels)
+{
+	for (unsigned int i = 0; i < fds.size(); i++)
+	{
+		Relation rel;
+		rel += fds[i].left;
+		rel += fds[i].right;
+		
+		rels.push_back(rel);
+	}
+}
+
+void ThirdNF::eliminateSubsetRelations(std::vector<Relation>& rels)
+{
+	// Find the relations that are subsets of other relations and delete them
+	for (unsigned int i; i < rels.size(); i++)
+	{
+		for (unsigned int j = 0; j < rels.size(); j++)
+		{
+			// Skip ourselves
+			if (i == j)
+				continue;
+
+			// If i is a subset of j, remove i
+			if (Utils::stringContains(rels[j].attributes, rels[i].attributes))
+			{
+				rels.erase(rels.begin() + i);
+				i--;
+				break;
+			}
+		}
+	}
+}
+
+void ThirdNF::checkRelationsForKey(std::vector<Relation>& rels, const std::vector<FD>& keys)
+{
+
 }
