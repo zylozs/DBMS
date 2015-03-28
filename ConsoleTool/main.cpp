@@ -10,7 +10,6 @@ int main()
 {
 	printf("Welcome to Kyle & Vince's DBMS Console Tool!\n");
 
-	ChaseTest test;
 	ThirdNF thirdNF;
 	Relation origRel("ABCD");
 	std::vector<Relation> newRels;
@@ -24,7 +23,6 @@ int main()
 	fds.push_back(FD("B", "D"));
 
 	thirdNF.normalize(origRel, fds);
-	//test.testNormalization(origRel, newRels, fds);
 
 	system("pause");
 	return 0;
