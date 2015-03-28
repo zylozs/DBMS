@@ -59,11 +59,14 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClosureSet.h">
-      <Filter>Header Files\Normalization\Datastructures</Filter>
-    </ClInclude>
     <ClInclude Include="Permutation.h">
-      <Filter>Header Files\Normalization\Datastructures</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosureSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputUtils.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

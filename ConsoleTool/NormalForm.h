@@ -7,11 +7,13 @@
 #include "ClosureSet.h"
 #include "Relation.h"
 #include "FD.h"
+#include "ChaseTest.h"
 
 class NormalForm
 {
 protected:
 	virtual bool testNormalization(Relation origRel, const std::vector<Relation>& newRels, const std::vector<FD>& fds) = 0; // Returns true if its valid, false otherwise
+	ChaseTest m_Test;
 
 public:
 	NormalForm() {}

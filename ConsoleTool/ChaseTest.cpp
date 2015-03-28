@@ -53,6 +53,7 @@ void ChaseTest::populateTable(Relation origRel, const std::vector<Relation>& rel
 				m_Table[curAtt][j] = curAtt + Utils::convertToString<int>(j + 1);
 		}
 	}
+	m_BaseTable = m_Table;
 }
 
 void ChaseTest::modifyTableForFD(const std::vector<FD>& fds)
@@ -135,6 +136,7 @@ void ChaseTest::modifyTableForFD(const std::vector<FD>& fds)
 		{
 			m_Table[fds[i].right][pairs[j]] = newVal;
 		}
+
 	}
 }
 

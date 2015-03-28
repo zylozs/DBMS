@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClInclude Include="ChaseTest.h" />
     <ClInclude Include="ClosureSet.h" />
+    <ClInclude Include="OutputUtils.h" />
     <ClInclude Include="Permutation.h" />
     <ClInclude Include="ThirdNF.h" />
     <ClInclude Include="FD.h" />

@@ -10,7 +10,11 @@ protected:
 private:
 	std::vector<ClosureSet*> m_ClosureSets;
 	std::vector<FD> m_ClosureFDs;
+	std::vector<FD> m_BaseFds;
 	std::vector<FD> m_NewFds;
+	Relation m_BaseRelation;
+	std::vector<Relation> m_BaseRelations;
+	std::vector<Relation> m_SubsetRemovedRelations;
 	std::vector<Relation> m_NewRelations;
 	std::vector<std::string> m_Keys;
 	std::vector<std::string> m_SuperKeys;
