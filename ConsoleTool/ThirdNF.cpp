@@ -68,9 +68,9 @@ std::string ThirdNF::getResults()
 	result += "\n";
 
 	//Title
-	result += "////////////////////////////\n";
-	result += "--3NF Normalization Resuts--\n";
-	result += "////////////////////////////\n";
+	result += "/////////////////////////////\n";
+	result += "--3NF Normalization Results--\n";
+	result += "/////////////////////////////\n";
 	
 	//Empty Line
 	result += "\n";
@@ -364,11 +364,12 @@ void ThirdNF::extractClosureFDs(const std::vector<ClosureSet*>& closures, std::v
 
 void ThirdNF::calculateSetOfPrimes(const std::vector<std::string>& keys, std::string& primes)
 {
-	bool exists = false;
+	
 	for (unsigned int i = 0; i < keys.size(); i++)
 	{
 		for (unsigned int j = 0; j < keys[i].size(); j++)
 		{
+			bool exists = false;
 			for (unsigned int k = 0; k < primes.size(); k++)
 			{
 				if (keys[i][j] == primes[k])
