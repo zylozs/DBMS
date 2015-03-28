@@ -1,0 +1,97 @@
+////////////////
+3NF
+////////////////
+
+R(A, B, C, D, E) 
+AB -> C
+DE -> C
+B -> D
+
+A = A
+B = BD (B -> D)
+C = C
+D = D 
+E = E
+AB = ABCD (AB -> C, AB -> D)
+AC = AC
+AD =AD
+AE = AE
+BC = BCD (BC -> D)
+BD = BD
+BE = BEDC (BE -> D, BE -> C)
+CD = CD 
+CE = CE
+DE = DEC (DE -> C)
+ABC = ABCD (ABC -> D)
+ABD = ABCD (ABD -> C)
+ABE = ABCDE - Key (ABE -> C, ABE -> D)
+ACD = ACD
+ACE = ACE
+ADE = ADEC (ADE -> C)
+BCD = BCD
+BCE = BCED (BCE -> D)
+BDE = BDEC (BDE -> C)
+ABCD = ABCD
+ABCE = ABCDE - Super Key (ABCE -> D)
+ACDE = ACDE
+BCDE = BCDE
+ABCDE = ABCDE - Super Key
+
+minimal basis:
+AB -> C
+B -> D
+
+set of primes:
+ABE
+
+violations:
+B -> D
+AB -> C
+AB -> D
+BC -> D
+BE -> D
+BE -> C
+DE -> C
+ABC -> D
+ABD -> C
+ADE -> C
+BCE -> D
+BDE -> C
+
+Tables:
+R1(ABC)
+R2(BD)
+
+Tables after eliminating subsets:
+unchanged
+
+Tables after checking for keys:
+R1(ABC)
+R2(BD)
+R3(ABE)
+
+/////////////////
+Chase Test
+/////////////////
+
+R:
+A   B   C   D   E
+-----------------
+A   B   C   D1  E1
+A2  B   C2  D   E2
+A   B   C3  D3  E
+
+R modified for FDs:
+A   B   C   D   E
+-----------------
+A   B   C   D   E1
+A2  B   C2  D   E2
+A   B   C   D   E
+
+Modifications to table:
+C3 -> C
+D1 -> D
+D3 -> D
+
+Results:
+Table is Lossless and valid
