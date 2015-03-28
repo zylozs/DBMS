@@ -1,0 +1,74 @@
+////////////////
+3NF
+////////////////
+
+R(A, B, C, D) 
+B -> C  
+B -> D
+
+A = A
+B = BCD (B -> C, B -> D)
+C = C
+D = D
+AB = ABCD - Key (AB -> C, AB -> D)
+AC = AC
+AD = AD
+BC = BCD (BC -> D)
+BD = BCD (BD -> C)
+CD = CD
+ABC = ABCD - Super Key (ABC -> D)
+ABD = ABCD - Super Key (ABD -> C)
+ACD = ACD
+BCD = BCD
+ABCD = ABCD - Super Key
+
+minimal basis:
+Already is
+
+set of primes:
+AB
+
+violations:
+B -> C
+B -> D
+BC -> D
+BD -> C
+
+Tables:
+R1(BC)
+R2(BD)
+
+Tables after eliminating subsets:
+unchanged
+
+Tables after checking for keys:
+R1(BC)
+R2(BD)
+R3(AB)
+
+/////////////////
+Chase Test
+/////////////////
+
+R:
+A   B   C   D
+-------------
+A1  B   C   D1
+A2  B   C2  D
+A   B   C3  D3
+
+R modified for FDs:
+A   B   C   D
+-------------
+A1  B   C   D
+A2  B   C   D
+A   B   C   D
+
+Modifications to table:
+C2 -> C
+C3 -> C
+D1 -> D
+D3 -> D
+
+Results:
+Table is Lossless and valid

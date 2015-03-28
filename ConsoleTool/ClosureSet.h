@@ -6,16 +6,16 @@ struct ClosureSet
 {
 public:
 	//Constructors/Destructors
-	ClosureSet(){};
-	ClosureSet(std::vector<Permutation> set){ closureSet = set; };
-	ClosureSet(Permutation perm){ closureSet.push_back(perm); };
-	~ClosureSet(){};
+	ClosureSet(){}
+	ClosureSet(std::vector<Permutation> set){ closureSet = set; }
+	ClosureSet(Permutation perm){ closureSet.push_back(perm); }
+	~ClosureSet(){}
 	
 	//Utils
-	Permutation getAttribute(int iter) { return closureSet.at(iter); };
-	std::vector<Permutation> getPermutations() { return closureSet; };
-	int getSize() { return closureSet.size(); };
-	int getClosureMaxSize() { return closureSize; };
+	Permutation getAttribute(int iter) { return closureSet.at(iter); }
+	std::vector<Permutation>& getPermutations() { return closureSet; }
+	int getSize() { return closureSet.size(); }
+	void addToPermRight(int perm, std::string right) { closureSet[perm].addToRight(right); }
 
 	//Operator Overloads
 	void operator+=(Permutation perm)
@@ -45,6 +45,4 @@ public:
 
 private: 
 	std::vector<Permutation> closureSet;
-	int closureSize;
 };
-

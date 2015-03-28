@@ -4,6 +4,7 @@
 #include "ThirdNF.h"
 #include "Relation.h"
 #include "FD.h"
+#include "Utils.h"
 
 int main()
 {
@@ -11,20 +12,19 @@ int main()
 
 	ChaseTest test;
 	ThirdNF thirdNF;
-	Relation origRel("ABCDE");
+	Relation origRel("ABCD");
 	std::vector<Relation> newRels;
 	std::vector<FD> fds;
 
+	newRels.push_back(Relation("BC"));
+	newRels.push_back(Relation("BD"));
 	newRels.push_back(Relation("AB"));
-	newRels.push_back(Relation("BCD"));
-	newRels.push_back(Relation("ACE"));
 
-	fds.push_back(FD("A", "B"));
-	fds.push_back(FD("BC", "D"));
-	fds.push_back(FD("AC", "E"));
+	fds.push_back(FD("B", "C"));
+	fds.push_back(FD("B", "D"));
 
 	thirdNF.normalize(origRel, fds);
-	test.testNormalization(origRel, newRels, fds);
+	//test.testNormalization(origRel, newRels, fds);
 
 	system("pause");
 	return 0;

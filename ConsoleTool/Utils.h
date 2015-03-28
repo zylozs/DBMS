@@ -100,7 +100,8 @@ public:
 		return theInt;
 	}
 
-	/*   Purpose:  This will return a bool which states whether or not object contains str
+	/*   Purpose:  This will return a bool which states whether or not object contains str. The order for this
+	 *             function does matter. If you don't want it to matter, use stringContainsChars
 	 *       Pre:  std::string object, std::string str
 	 *      Post:  bool
 	 ****************************************************************/
@@ -139,6 +140,38 @@ public:
 
 		return result;
 	}
+	
+	/*   Purpose:  This will check the input string for the set of charactes provided. If any of them are missing
+	 *			   it will return false. The order does not matter. If you want the order to matter, use stringContains
+	 *       Pre:  std::string, std::string
+	 *      Post:  bool
+	 ****************************************************************/
+	static bool stringContainsChars(std::string object, std::string chars)
+	{
+		if (object.size() < chars.size())
+			return false;
+
+		int size = chars.size();
+
+		for (unsigned int i = 0; i < chars.size(); i++)
+		{
+			bool test = false;
+
+			for (unsigned int j = 0; j < object.size(); j++)
+			{
+				if (object[j] == chars[i])
+				{
+					test = true;
+					break;
+				}
+			}
+
+			if (!test)
+				return false;
+		}
+
+		return true;
+	}
 
 	/*   Purpose:  This will check the input string for valid characters using a string provided. If it finds
 	 *             any characters which are not valid, it will return false, otherwise it will return true
@@ -173,6 +206,30 @@ public:
 			return false;
 
 		return true;
+	}
+
+	/*   Purpose:  This will subtract the left string by the right string. It will remove all the values of the right
+	 *			   string from the left string and return the result.
+	 *       Pre:  std::string, std::string
+	 *      Post:  std::string
+	 ****************************************************************/
+	static std::string stringSubtract(std::string left, std::string right)
+	{
+		std::string result = left;
+
+		for (unsigned int i = 0; i < right.size(); i++)
+		{
+			for (unsigned int j = 0; j < result.size(); j++)
+			{
+				if (result[j] == right[i])
+				{
+					result.erase(result.begin() + j);
+					j--;
+				}
+			}
+		}
+
+		return result;
 	}
 
 	/*   Purpose:  This will map the value of type T from its original "scope" to its new provided "scope" and return it
