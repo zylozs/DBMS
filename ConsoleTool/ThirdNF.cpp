@@ -59,8 +59,6 @@ void ThirdNF::normalize(Relation relation, const std::vector<FD>& fds)
 	}
 
 	m_IsValid = testNormalization(m_BaseRelation, m_NewRelations, m_BaseFds);
-
-	std::cout << getResults() << std::endl;
 }
 
 std::string ThirdNF::getResults()
@@ -91,11 +89,11 @@ std::string ThirdNF::getResults()
 
 	//Closure Results
 	result += "-Closure Statements-\n\n";
-	int numClosureSets = m_ClosureSets.size();
+	unsigned int numClosureSets = m_ClosureSets.size();
 	for (unsigned int i = 0; i < numClosureSets; ++i)
 	{
 		ClosureSet set = *m_ClosureSets.at(i);
-		int numPermutations = set.getPermutations().size();
+		unsigned int numPermutations = set.getPermutations().size();
 		for (unsigned int j = 0; j < numPermutations; ++j)
 		{
 			//Left hand side
@@ -103,8 +101,8 @@ std::string ThirdNF::getResults()
 			result += "{";
 
 			//--check to see if it is a key or superkey
-			int numKeys = m_Keys.size();
-			int numSuperKeys = m_SuperKeys.size();
+			unsigned int numKeys = m_Keys.size();
+			unsigned int numSuperKeys = m_SuperKeys.size();
 
 			bool isKey = false;
 			bool isSuperKey = false;

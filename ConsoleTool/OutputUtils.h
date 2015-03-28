@@ -93,7 +93,7 @@ public:
 		result += name + ":\n";
 
 		//find length of longest string
-		int maxStringSize = 0;
+		unsigned int maxStringSize = 0;
 		unsigned int maxRows = 0;
 		unsigned int maxColumns = data.size();
 		std::map<std::string, std::vector<std::string>>::iterator it;
@@ -123,7 +123,7 @@ public:
 
 		maxStringSize += 1;
 
-		//Write first row
+		//Write first line
 		for (unsigned int i = 0; i < (maxStringSize * data.size()) + 1 + data.size(); ++i)
 		{
 			result += "-";
@@ -131,6 +131,7 @@ public:
 
 		result += "\n";
 
+		// Write Keys
 		std::map<std::string, std::vector<std::string>>::iterator _it;
 		for (_it = data.begin(); _it != data.end(); _it++)
 		{
@@ -146,6 +147,7 @@ public:
 
 		unsigned int numCharsPerRow = 0;
 
+		// Write second line
 		for (unsigned int i = 0; i < (maxStringSize * data.size()) + 1 + data.size(); ++i)
 		{
 			result += "-";
@@ -161,7 +163,9 @@ public:
 			{
 				result += "|";
 				result += _it2->second.at(i);
-				for (unsigned int i = 0; i < maxStringSize - _it2->second.at(i).size(); ++i)
+
+
+				for (unsigned int j = 0; j < maxStringSize - _it2->second.at(i).size(); ++j)
 				{
 					result += " ";
 				}
@@ -178,4 +182,3 @@ public:
 		return result;
 	}
 };
-

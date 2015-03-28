@@ -193,6 +193,9 @@ bool extractRelation(std::string input, Relation& out)
 	relName = input.substr(0, startIndex);
 	attributes = input.substr(startIndex + 1, finalIndex - 2);
 
+	if (relName == "")
+		return false;
+
 	// Split the attributes into individual attributes which we will then store in the relation
 	while (true)
 	{

@@ -14,11 +14,11 @@ D = D
 E = E
 AB = ABCD (AB -> C, AB -> D)
 AC = AC
-AD =AD
+AD = AD
 AE = AE
 BC = BCD (BC -> D)
 BD = BD
-BE = BEDC (BE -> D, BE -> C)
+BE = BED (BE -> D)
 CD = CD 
 CE = CE
 DE = DEC (DE -> C)
@@ -31,8 +31,10 @@ ADE = ADEC (ADE -> C)
 BCD = BCD
 BCE = BCED (BCE -> D)
 BDE = BDEC (BDE -> C)
+CDE = CDE
 ABCD = ABCD
 ABCE = ABCDE - Super Key (ABCE -> D)
+ABDE = ABDEC - Super Key (ABDE -> C)
 ACDE = ACDE
 BCDE = BCDE
 ABCDE = ABCDE - Super Key
@@ -50,7 +52,6 @@ AB -> C
 AB -> D
 BC -> D
 BE -> D
-BE -> C
 DE -> C
 ABC -> D
 ABD -> C
