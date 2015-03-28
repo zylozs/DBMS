@@ -405,28 +405,28 @@ void ThirdNF::getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& ne
 	}
 
 	// Remove all trivial FDs (where something determines itself)
-	std::vector<FD>::iterator it = newFds.begin();
-
-	for (it; it != newFds.end(); it++)
+	for (unsigned int i = 0; i < newFds.size(); i++)
 	{
-		if (Utils::stringContainsChars(it->left, it->right))
+		if (Utils::stringContainsChars(newFds[i].left, newFds[i].right))
 		{
-			it = newFds.erase(it);
+			newFds.erase(newFds.begin() + i);
+			i--;
 		}
 	}
 
 	// Remove redundant FDs
 	std::string rightSide = "";
 
-	for (it = newFds.begin(); it != newFds.end(); it++)
+	for (unsigned int i = 0; i < newFds.size(); i++)
 	{
-		if (Utils::stringContainsChars(rightSide, it->right))
+		if (Utils::stringContainsChars(rightSide, newFds[i].right))
 		{
-			it = newFds.erase(it);
+			newFds.erase(newFds.begin() + i);
+			i--;
 		}
 		else
 		{
-			rightSide += it->right;
+			rightSide += newFds[i].right;
 		}
 	}
 }
