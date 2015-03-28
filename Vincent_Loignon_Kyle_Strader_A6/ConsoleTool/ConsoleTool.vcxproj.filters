@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Normalization">
+      <UniqueIdentifier>{80b13574-e686-438d-9f72-52e1eec33cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Normalization\Datastructures">
+      <UniqueIdentifier>{7e89b350-acdf-4167-8573-6f2268b18a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Normalization">
+      <UniqueIdentifier>{63384f04-6477-4236-b6af-ed415f14456c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdNF.cpp">
+      <Filter>Source Files\Normalization</Filter>
+    </ClCompile>
+    <ClCompile Include="ChaseTest.cpp">
+      <Filter>Source Files\Normalization</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalForm.cpp">
+      <Filter>Source Files\Normalization</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalForm.h">
+      <Filter>Header Files\Normalization</Filter>
+    </ClInclude>
+    <ClInclude Include="Relation.h">
+      <Filter>Header Files\Normalization\Datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="FD.h">
+      <Filter>Header Files\Normalization\Datastructures</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdNF.h">
+      <Filter>Header Files\Normalization</Filter>
+    </ClInclude>
+    <ClInclude Include="ChaseTest.h">
+      <Filter>Header Files\Normalization</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Permutation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClosureSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

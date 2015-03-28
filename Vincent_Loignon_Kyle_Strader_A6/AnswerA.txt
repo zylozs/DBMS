@@ -1,0 +1,99 @@
+
+/////////////////////////////
+--3NF Normalization Results--
+/////////////////////////////
+
+-Original Relation-
+
+R(A,B,C,D)
+B -> C
+B -> D
+
+-Closure Statements-
+
+{A}+ = A
+{B}+ = B,C,D
+{C}+ = C
+{D}+ = D
+{A,B}+ = A,B,C,D - Key
+{A,C}+ = A,C
+{A,D}+ = A,D
+{B,C}+ = B,C,D
+{B,D}+ = B,D,C
+{C,D}+ = C,D
+{A,B,C}+ = A,B,C,D - SuperKey
+{A,B,D}+ = A,B,D,C - SuperKey
+{A,C,D}+ = A,C,D
+{B,C,D}+ = B,C,D
+{A,B,C,D}+ = A,B,C,D - SuperKey
+
+-Closure Functional Dependencies-
+
+B -> C
+B -> D
+A,B -> C
+A,B -> D
+B,C -> D
+B,D -> C
+A,B,C -> D
+A,B,D -> C
+
+-Minimal Basis Functional Dependencies-
+
+Is in minimal basis!
+B -> C
+B -> D
+
+-Set of Primes-
+
+(A,B)
+
+-Functional Dependency Violations-
+
+B -> C
+B -> D
+B,C -> D
+B,D -> C
+
+-Original Relations-
+
+R1(B,C)
+R2(B,D)
+
+-Subset Removed Relations-
+
+R1(B,C)
+R2(B,D)
+
+-New Relations (after checking for keys)-
+
+R1(B,C)
+R2(B,D)
+R3(A,B)
+
+//////////////
+--Chase Test--
+//////////////
+
+R:
+-----------------
+|A  |B  |C  |D  |
+-----------------
+|A1 |B  |C  |D1 |
+|A2 |B  |C2 |D  |
+|A  |B  |C3 |D3 |
+-----------------
+
+R Modified For FDs:
+-----------------
+|A  |B  |C  |D  |
+-----------------
+|A1 |B  |C  |D  |
+|A2 |B  |C  |D  |
+|A  |B  |C  |D  |
+-----------------
+
+
+-Chase Test Results-
+
+Table is valid and lossless!
