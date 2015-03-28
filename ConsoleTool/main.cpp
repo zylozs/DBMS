@@ -2,19 +2,13 @@
 
 int main()
 {
-	printf("--------------------------------------------------------------------------------\n");
-	printf("||               Welcome to Kyle & Vince's DBMS Console Tool!                 ||\n");
-	printf("--------------------------------------------------------------------------------\n");
-
 	while (true)
 	{
-		ThirdNF thirdNF;
-		Relation origRel;
-		std::vector<Relation> newRels;
-		std::vector<FD> fds;
+		printf("--------------------------------------------------------------------------------\n");
+		printf("||               Welcome to Kyle & Vince's DBMS Console Tool!                 ||\n");
+		printf("--------------------------------------------------------------------------------\n");
+
 		int option = 0;
-		int outputOption = 0;
-		std::string outputFile = "";
 
 		while (true)
 		{
@@ -39,83 +33,7 @@ int main()
 
 		if (option == 1)
 		{
-			// Get relation
-			while (true)
-			{
-				printf("\nEnter your Relation. White space will be ignored.\n");
-				printf("Usage: R(A, B, ...) \n\n");
-				printf("> ");
-
-				// Grab their input
-				std::string temp = "";
-				getline(std::cin, temp);
-
-				// extract the relation
-				if (!extractRelation(temp, origRel))
-				{
-					printf("\nInvalid Usage.\n\n");
-					continue;
-				}
-
-				break;
-			}
-
-			// Get FDs
-			while (true)
-			{
-				printf("\nEnter your Functional Dependencies. White sapce will be ignored.\n");
-				printf("Usage: B->C, AD->E, ...\n");
-				printf("> ");
-
-				std::string temp = "";
-				getline(std::cin, temp);
-
-				if (!extractFDs(temp, fds))
-				{
-					fds.clear();
-
-					printf("\nInvalid Usage.\n\n");
-					continue;;
-				}
-
-				break;
-			}
-
-			// Get output file
-			while(true)
-			{
-				printf("\nWhere would you like it to output? (You can specify the file)\n");
-				printf("Usage: \tconsole\n\tfile.txt\n\tboth file.txt\n");
-				printf("> ");
-
-				std::string temp = "";
-				getline(std::cin, temp);
-
-				// Just console
-				if (temp == "console")
-					outputOption = 1;
-				else
-				{
-					size_t i = temp.find("both ");
-
-					// Just file
-					if (i == std::string::npos)
-					{
-						outputOption = 2;
-						outputFile = temp;
-					}
-					else // File and console
-					{
-						outputOption = 3;
-
-						outputFile = temp.substr(5);
-					}
-				}
-				
-				break;
-			}
-
-			thirdNF.normalize(origRel, fds);
+			perform3NF();
 		}
 		else if (option == 2)
 		{
@@ -123,11 +41,137 @@ int main()
 		}
 
 		system("pause");
+		system("cls");
 	}
 
 	system("pause");
 	return 0;
 }
+
+#pragma region ThirdNF Functions
+
+void perform3NF()
+{
+	ThirdNF thirdNF;
+	Relation origRel;
+	std::vector<Relation> newRels;
+	std::vector<FD> fds;
+	int outputOption = 0;
+	std::string outputFile = "";
+	std::string results = "";
+
+	// Get relation
+	getRelation(origRel);
+
+	// Get FDs
+	getFDs(fds);
+
+	// Get output file
+	getOutput(outputOption, outputFile);
+
+	thirdNF.normalize(origRel, fds);
+	results = thirdNF.getResults();
+
+	switch (outputOption)
+	{
+		case 1: // Console
+			std::cout << results << std::endl;
+			break;
+		case 2: // File
+			outputToFile(outputFile, results);
+			break;
+		case 3: // Console & File
+			std::cout << results << std::endl;
+			outputToFile(outputFile, results);
+			break;
+	}
+}
+
+void getRelation(Relation& out)
+{
+	while (true)
+	{
+		printf("\nEnter your Relation. White space will be ignored.\n");
+		printf("Usage: R(A, B, ...) \n\n");
+		printf("> ");
+
+		// Grab their input
+		std::string temp = "";
+		getline(std::cin, temp);
+
+		// extract the relation
+		if (!extractRelation(temp, out))
+		{
+			printf("\nInvalid Usage.\n\n");
+			continue;
+		}
+
+		break;
+	}
+}
+
+void getFDs(std::vector<FD>& out)
+{
+	while (true)
+	{
+		printf("\nEnter your Functional Dependencies. White space will be ignored.\n");
+		printf("Usage: B->C, AD->E, ...\n");
+		printf("> ");
+
+		std::string temp = "";
+		getline(std::cin, temp);
+
+		if (!extractFDs(temp, out))
+		{
+			out.clear();
+
+			printf("\nInvalid Usage.\n\n");
+			continue;;
+		}
+
+		break;
+	}
+}
+
+void getOutput(int& option, std::string& file)
+{
+	while (true)
+	{
+		printf("\nWhere would you like it to output? (You can specify the file)\n");
+		printf("Usage: \tconsole\n\tfile.txt\n\tboth file.txt\n");
+		printf("> ");
+
+		std::string temp = "";
+		getline(std::cin, temp);
+
+		// Just console
+		if (temp == "console")
+			option = 1;
+		else
+		{
+			size_t i = temp.find("both ");
+
+			// Just file
+			if (i == std::string::npos)
+			{
+				option = 2;
+				file = temp;
+			}
+			else // File and console
+			{
+				option = 3;
+
+				file = temp.substr(5);
+			}
+		}
+
+		break;
+	}
+}
+
+#pragma endregion
+
+#pragma region Input Functions
 
 bool extractRelation(std::string input, Relation& out)
 {
@@ -232,3 +276,26 @@ std::string removeSpaces(std::string input)
 
 	return output;
 }
+
+#pragma endregion
+
+#pragma region Misc Functions
+
+void outputToFile(std::string file, std::string val)
+{
+	std::ofstream out;
+
+	out.open(file, std::ofstream::out);
+
+	if (out.fail())
+	{
+		printf("\nThere was an error opening your file.\n");
+		return;
+	}
+
+	out << val;
+
+	out.close();
+}
+
+#pragma endregion
