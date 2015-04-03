@@ -206,6 +206,10 @@ std::string ThirdNF::getResults()
 	//Empty Line
 	result += "\n";
 
+	// If we have no violations, stop here!
+	if (m_FDViolations.size() == 0)
+		return result;
+
 	//List tables
 	result += "-Original Relations-\n\n";
 	result += OutputUtils::WriteRelations(m_BaseRelations);
@@ -290,17 +294,28 @@ void ThirdNF::calculateClosureRightSide(std::vector<ClosureSet*>& closures, cons
 {
 	for (unsigned int i = 0; i < closures.size(); i++)
 	{
-		std::vector<Permutation> perms = closures[i]->getPermutations();
+		int numPerms = closures[i]->getSize();
+		bool repeatFDs = false;
 
-		for (unsigned int j = 0; j < perms.size(); j++)
+		for (int j = 0; j < numPerms; j++)
 		{
+			repeatFDs = false;
+
 			for (unsigned int k = 0; k < fds.size(); k++)
 			{
-				if (Utils::stringContainsChars(perms[j].getRightSide(), fds[k].left))
+				if (Utils::stringContainsChars(closures[i]->getPerm(j).getRightSide(), fds[k].left))
 				{
-					closures[i]->addToPermRight(j, fds[k].right);
+					bool temp = closures[i]->addToPermRight(j, fds[k].right);
+
+					// If something was actually added, we need to repeat the fds
+					if (temp)
+						repeatFDs = true;
 				}
 			}
+
+			// If anything was added to the right side, we repeat the FDs to make sure none are missed
+			if (repeatFDs)
+				j--;
 		}
 	}
 }
@@ -414,7 +429,7 @@ void ThirdNF::getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& ne
 	}
 
 	// Remove redundant FDs
-	std::string rightSide = "";
+	/*std::string rightSide = "";
 
 	for (unsigned int i = 0; i < newFds.size(); i++)
 	{
@@ -427,7 +442,7 @@ void ThirdNF::getMinimalBasis(const std::vector<FD>& oldFds, std::vector<FD>& ne
 		{
 			rightSide += newFds[i].right;
 		}
-	}
+	}*/
 }
 
 void ThirdNF::createRelationsFromMinimalBasis(const std::vector<FD>& fds, std::vector<Relation>& rels)

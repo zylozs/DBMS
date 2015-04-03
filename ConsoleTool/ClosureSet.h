@@ -13,9 +13,10 @@ public:
 	
 	//Utils
 	Permutation getAttribute(int iter) { return closureSet.at(iter); }
-	std::vector<Permutation>& getPermutations() { return closureSet; }
+	std::vector<Permutation>& getPermutations() { return closureSet; } // Don't use this if you want to modify the perms!
+	Permutation getPerm(int i) { return closureSet[i]; }
 	int getSize() { return closureSet.size(); }
-	void addToPermRight(int perm, std::string right) { closureSet[perm].addToRight(right); }
+	bool addToPermRight(int perm, std::string right) { return closureSet[perm].addToRight(right); }
 
 	//Operator Overloads
 	void operator+=(Permutation perm)
