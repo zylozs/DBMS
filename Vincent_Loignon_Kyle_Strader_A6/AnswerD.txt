@@ -23,7 +23,7 @@ B -> D
 {A,E}+ = A,E
 {B,C}+ = B,C,D
 {B,D}+ = B,D
-{B,E}+ = B,E,D
+{B,E}+ = B,E,D,C
 {C,D}+ = C,D
 {C,E}+ = C,E
 {D,E}+ = D,E,C
@@ -51,6 +51,7 @@ A,B -> C
 A,B -> D
 B,C -> D
 B,E -> D
+B,E -> C
 D,E -> C
 A,B,C -> D
 A,B,D -> C
@@ -64,8 +65,9 @@ A,B,D,E -> C
 
 -Minimal Basis Functional Dependencies-
 
-Is not in minimal basis!
+Is in minimal basis!
 A,B -> C
+D,E -> C
 B -> D
 
 -Set of Primes-
@@ -79,6 +81,7 @@ A,B -> C
 A,B -> D
 B,C -> D
 B,E -> D
+B,E -> C
 D,E -> C
 A,B,C -> D
 A,B,D -> C
@@ -89,18 +92,21 @@ B,D,E -> C
 -Original Relations-
 
 R1(A,B,C)
-R2(B,D)
+R2(D,E,C)
+R3(B,D)
 
 -Subset Removed Relations-
 
 R1(A,B,C)
-R2(B,D)
+R2(D,E,C)
+R3(B,D)
 
 -New Relations (after checking for keys)-
 
 R1(A,B,C)
-R2(B,D)
-R3(A,B,E)
+R2(D,E,C)
+R3(B,D)
+R4(A,B,E)
 
 //////////////
 --Chase Test--
@@ -111,8 +117,9 @@ R:
 |A  |B  |C  |D  |E  |
 ---------------------
 |A  |B  |C  |D1 |E1 |
-|A2 |B  |C2 |D  |E2 |
-|A  |B  |C3 |D3 |E  |
+|A2 |B2 |C  |D  |E  |
+|A3 |B  |C3 |D  |E3 |
+|A  |B  |C4 |D4 |E  |
 ---------------------
 
 R Modified For FDs:
@@ -120,7 +127,8 @@ R Modified For FDs:
 |A  |B  |C  |D  |E  |
 ---------------------
 |A  |B  |C  |D  |E1 |
-|A2 |B  |C2 |D  |E2 |
+|A2 |B2 |C  |D  |E  |
+|A3 |B  |C3 |D  |E3 |
 |A  |B  |C  |D  |E  |
 ---------------------
 

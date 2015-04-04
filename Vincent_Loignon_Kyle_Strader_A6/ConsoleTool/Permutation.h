@@ -20,9 +20,10 @@ public:
 	void insertAttributes(std::string att, int iter) { permutation.insert(iter, att); rightSide.insert(iter, att); }
 	void insertRightSide(std::string att, int iter) { rightSide.insert(iter, att); }
 
-	void addToRight(std::string right)
+	bool addToRight(std::string right)
 	{
 		bool exists = false;
+		bool addedSomething = false;
 		for (unsigned int i = 0; i < right.size(); i++)
 		{
 			for (unsigned int j = 0; j < rightSide.size(); j++)
@@ -37,8 +38,11 @@ public:
 			if (!exists)
 			{
 				rightSide += right[i];
+				addedSomething = true;
 			}
 		}
+		
+		return addedSomething;
 	}
 
 	//Operator Overloads

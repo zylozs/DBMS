@@ -13,16 +13,16 @@ D -> A
 
 -Closure Statements-
 
-{A}+ = A,B
-{B}+ = B,C
-{C}+ = C,D
-{D}+ = D,A
-{A,B}+ = A,B,C
-{A,C}+ = A,C,B,D - Key
-{A,D}+ = A,D,B
-{B,C}+ = B,C,D
-{B,D}+ = B,D,C,A - Key
-{C,D}+ = C,D,A
+{A}+ = A,B,C,D - Key
+{B}+ = B,C,D,A - Key
+{C}+ = C,D,A,B - Key
+{D}+ = D,A,B,C - Key
+{A,B}+ = A,B,C,D - SuperKey
+{A,C}+ = A,C,B,D - SuperKey
+{A,D}+ = A,D,B,C - SuperKey
+{B,C}+ = B,C,D,A - SuperKey
+{B,D}+ = B,D,C,A - SuperKey
+{C,D}+ = C,D,A,B - SuperKey
 {A,B,C}+ = A,B,C,D - SuperKey
 {A,B,D}+ = A,B,D,C - SuperKey
 {A,C,D}+ = A,C,D,B - SuperKey
@@ -32,17 +32,29 @@ D -> A
 -Closure Functional Dependencies-
 
 A -> B
+A -> C
+A -> D
 B -> C
+B -> D
+B -> A
 C -> D
+C -> A
+C -> B
 D -> A
+D -> B
+D -> C
 A,B -> C
+A,B -> D
 A,C -> B
 A,C -> D
 A,D -> B
+A,D -> C
 B,C -> D
+B,C -> A
 B,D -> C
 B,D -> A
 C,D -> A
+C,D -> B
 A,B,C -> D
 A,B,D -> C
 A,C,D -> B
@@ -58,60 +70,8 @@ D -> A
 
 -Set of Primes-
 
-(A,C,B,D)
+(A,B,C,D)
 
 -Functional Dependency Violations-
 
 
--Original Relations-
-
-R1(A,B)
-R2(B,C)
-R3(C,D)
-R4(D,A)
-
--Subset Removed Relations-
-
-R1(A,B)
-R2(B,C)
-R3(C,D)
-R4(D,A)
-
--New Relations (after checking for keys)-
-
-R1(A,B)
-R2(B,C)
-R3(C,D)
-R4(D,A)
-R5(A,C)
-
-//////////////
---Chase Test--
-//////////////
-
-R:
------------------
-|A  |B  |C  |D  |
------------------
-|A  |B  |C1 |D1 |
-|A2 |B  |C  |D2 |
-|A3 |B3 |C  |D  |
-|A  |B4 |C4 |D  |
-|A  |B5 |C  |D5 |
------------------
-
-R Modified For FDs:
------------------
-|A  |B  |C  |D  |
------------------
-|A  |B  |C  |D  |
-|A  |B  |C  |D  |
-|A  |B3 |C  |D  |
-|A  |B  |C  |D  |
-|A  |B  |C  |D  |
------------------
-
-
--Chase Test Results-
-
-Table is valid and lossless!
