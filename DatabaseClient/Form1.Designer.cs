@@ -52,6 +52,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -72,6 +73,8 @@
             // 
             // sqlConnection1
             // 
+            this.sqlConnection1.ConnectionString = "Data Source=localhost;Initial Catalog=VideoGameRentalService;Integrated Security=" +
+    "True";
             this.sqlConnection1.FireInfoMessageEventOnUserErrors = false;
             this.sqlConnection1.InfoMessage += new System.Data.SqlClient.SqlInfoMessageEventHandler(this.sqlConnection1_InfoMessage);
             // 
