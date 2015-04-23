@@ -26,10 +26,17 @@ namespace DatabaseClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            m_Connection = new SqlConnection(sqlConnection1.ConnectionString);
-            m_Connection.Open();
+            try
+            {
+                m_Connection = new SqlConnection(sqlConnection1.ConnectionString);
+                m_Connection.Open();
 
-            comboBox1.Items.AddRange(ListTables().ToArray());
+                comboBox1.Items.AddRange(ListTables().ToArray());
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private List<string> ListTables()
@@ -42,11 +49,6 @@ namespace DatabaseClient
                 tables.Add(tablename);
             }
             return tables;
-        }
-
-        private void sqlConnection1_InfoMessage(object sender, SqlInfoMessageEventArgs e)
-        {
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,6 +66,12 @@ namespace DatabaseClient
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        // Query Popup
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
