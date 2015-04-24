@@ -1,6 +1,6 @@
 ﻿namespace DatabaseClient
 {
-    partial class Form1
+    partial class Client
     {
         /// <summary>
         /// Required designer variable.
