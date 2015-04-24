@@ -42,6 +42,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.Left = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -108,6 +111,10 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Left,
+            this.Operator,
+            this.Right});
             this.dataGridView1.Location = new System.Drawing.Point(3, 282);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -194,6 +201,24 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Type out your SQL statement";
             // 
+            // Left
+            // 
+            this.Left.HeaderText = "Left";
+            this.Left.Name = "Left";
+            this.Left.ReadOnly = true;
+            // 
+            // Operator
+            // 
+            this.Operator.HeaderText = "Operator";
+            this.Operator.Name = "Operator";
+            this.Operator.ReadOnly = true;
+            // 
+            // Right
+            // 
+            this.Right.HeaderText = "Right";
+            this.Right.Name = "Right";
+            this.Right.ReadOnly = true;
+            // 
             // Query
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,6 +253,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Left;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Operator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Right;
 
     }
 }

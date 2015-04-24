@@ -27,6 +27,8 @@ namespace DatabaseClient
         }
 
         private List<string> m_Attributes;
+        private int m_NumSelectedChecked;
+        private int m_NumFromChecked;
 
         public Query()
         {
@@ -45,9 +47,10 @@ namespace DatabaseClient
 
         public void addCondition(string left, string comparisonOperator, string right)
         {
-            Console.WriteLine(left);
-            Console.WriteLine(comparisonOperator);
-            Console.WriteLine(right);
+            int index = dataGridView1.Rows.Add(1);
+            dataGridView1[0, index].Value = left;
+            dataGridView1[1, index].Value = comparisonOperator;
+            dataGridView1[2, index].Value = right;
         }
 
         private void clearCheckboxes(CheckedListBox box)
@@ -88,7 +91,90 @@ namespace DatabaseClient
         // Send Query (Build Query Tab)
         private void button2_Click(object sender, EventArgs e)
         {
+            string error = "";
 
+            // From Check
+            bool valid = false;
+            for (int i = 0; i < fromCheckedListBox.Items.Count; i++)
+            {
+                if (fromCheckedListBox.GetItemChecked(i))
+                    valid = true;
+            }
+
+            if (!valid)
+                error += "- You must select a table to query from.\n";
+
+            // Select Check
+            valid = false;
+            for (int i = 0; i < selectCheckedListBox.Items.Count; i++)
+            {
+                if (selectCheckedListBox.GetItemChecked(i))
+                    valid = true;
+            }
+
+            if (!valid)
+                error += "- You must select an attribute.\n";
+
+            // Error check, otherwise build the SQL string
+            if (error != "")
+            {
+                MessageBox.Show(error);
+            }
+            else
+            {
+                m_SQLCommand = "SELECT ";
+                
+                int count = 0;
+                // Add all selected items with commas between
+                for (int i = 0; i < selectCheckedListBox.Items.Count; i++)
+                {
+                    if (selectCheckedListBox.GetItemChecked(i))
+                    {
+                        if (count != 0 && count <= m_NumSelectedChecked)
+                            m_SQLCommand += ", ";
+
+                        m_SQLCommand += selectCheckedListBox.Items[i].ToString();
+
+                        count++;
+                    }
+                }
+
+                m_SQLCommand += " FROM ";
+
+                // Add tables with commas between
+                count = 0;
+                for (int i = 0; i < fromCheckedListBox.Items.Count; i++)
+                {
+                    if (fromCheckedListBox.GetItemChecked(i))
+                    {
+                        if (count != 0 && count <= m_NumFromChecked)
+                            m_SQLCommand += ", ";
+
+                        m_SQLCommand += fromCheckedListBox.Items[i].ToString();
+
+                        count++;
+                    }
+                }
+
+                if (dataGridView1.Rows.Count > 0)
+                    m_SQLCommand += " WHERE ";
+
+                // Add conditions
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if (i != 0 && i + 1 != dataGridView1.Rows.Count)
+                        m_SQLCommand += " AND ";
+
+                    DataGridViewCellCollection cells = dataGridView1.Rows[i].Cells;
+                    m_SQLCommand += cells[0].Value + " ";
+                    m_SQLCommand += cells[1].Value + " ";
+                    m_SQLCommand += cells[2].Value;
+                }
+
+                // Execute the command
+                if (m_Parent.executeSQL(m_SQLCommand))
+                    Close();
+            }
         }
 
         private void fromCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,6 +182,14 @@ namespace DatabaseClient
             int index = fromCheckedListBox.SelectedIndex;
             bool value = fromCheckedListBox.GetItemChecked(index);
             fromCheckedListBox.SetItemChecked(index, value);
+
+            m_NumFromChecked = 0;
+
+            for (int i = 0; i < fromCheckedListBox.Items.Count; i++)
+            {
+                if (fromCheckedListBox.GetItemChecked(i))
+                    m_NumFromChecked++;
+            }
 
             populateSelectCheckboxes();
         }
@@ -106,6 +200,14 @@ namespace DatabaseClient
             int index = selectCheckedListBox.SelectedIndex;
             bool value = selectCheckedListBox.GetItemChecked(index);
             selectCheckedListBox.SetItemChecked(index, value);
+
+            m_NumSelectedChecked = 0;
+
+            for (int i = 0; i < selectCheckedListBox.Items.Count; i++)
+            {
+                if (selectCheckedListBox.GetItemChecked(i))
+                    m_NumSelectedChecked++;
+            }
         }
 
         // New Condition
