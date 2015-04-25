@@ -50,6 +50,7 @@
             this.button2.TabIndex = 22;
             this.button2.Text = "Send";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button1
             // 
@@ -59,6 +60,7 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Add New Condition";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label3
             // 
@@ -107,6 +109,7 @@
             this.fromCheckedListBox.Name = "fromCheckedListBox";
             this.fromCheckedListBox.Size = new System.Drawing.Size(401, 94);
             this.fromCheckedListBox.TabIndex = 18;
+            this.fromCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.fromCheckedListBox_SelectedIndexChanged_1);
             // 
             // label2
             // 
@@ -136,6 +139,7 @@
             this.selectCheckedListBox.Name = "selectCheckedListBox";
             this.selectCheckedListBox.Size = new System.Drawing.Size(401, 94);
             this.selectCheckedListBox.TabIndex = 15;
+            this.selectCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.selectCheckedListBox_SelectedIndexChanged);
             // 
             // Query
             // 

@@ -89,7 +89,7 @@ namespace DatabaseClient
         }
 
         // Send Query Button
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             string error = "";
 
@@ -177,29 +177,12 @@ namespace DatabaseClient
             }
         }
 
-        private void fromCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = fromCheckedListBox.SelectedIndex;
-            bool value = fromCheckedListBox.GetItemChecked(index);
-            fromCheckedListBox.SetItemChecked(index, value);
-
-            m_NumFromChecked = 0;
-
-            for (int i = 0; i < fromCheckedListBox.Items.Count; i++)
-            {
-                if (fromCheckedListBox.GetItemChecked(i))
-                    m_NumFromChecked++;
-            }
-
-            populateSelectCheckboxes();
-        }
-
         // Select Checkbox Change
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void selectCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = selectCheckedListBox.SelectedIndex;
             bool value = selectCheckedListBox.GetItemChecked(index);
-            selectCheckedListBox.SetItemChecked(index, value);
+            selectCheckedListBox.SetItemChecked(index, !value);
 
             m_NumSelectedChecked = 0;
 
@@ -211,7 +194,7 @@ namespace DatabaseClient
         }
 
         // New Condition
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             if (m_Attributes == null || m_Attributes.Count == 0)
             {
@@ -224,6 +207,24 @@ namespace DatabaseClient
 
                 condition.Show();
             }
+        }
+
+        // From Checkbox Change
+        private void fromCheckedListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            int index = fromCheckedListBox.SelectedIndex;
+            bool value = fromCheckedListBox.GetItemChecked(index);
+            fromCheckedListBox.SetItemChecked(index, !value);
+
+            m_NumFromChecked = 0;
+
+            for (int i = 0; i < fromCheckedListBox.Items.Count; i++)
+            {
+                if (fromCheckedListBox.GetItemChecked(i))
+                    m_NumFromChecked++;
+            }
+
+            populateSelectCheckboxes();
         }
     }
 }

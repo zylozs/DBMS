@@ -83,7 +83,9 @@ namespace DatabaseClient
             try
             {
                 m_DataAdapter.Fill(m_DataSet);
-                dataGridView1.DataSource = m_DataSet.Tables[0];
+
+                if (m_DataSet.Tables.Count > 0)
+                    dataGridView1.DataSource = m_DataSet.Tables[0];
             }
             catch (Exception ex)
             {
@@ -130,6 +132,23 @@ namespace DatabaseClient
             popup.initialize(this);
 
             popup.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int changes = 0;
+                m_DataAdapter.UpdateCommand = m_CmdBuilder.GetUpdateCommand();
+                changes = m_DataAdapter.Update(m_DataSet.Tables[comboBox1.SelectedItem.ToString()]);
+
+                MessageBox.Show(changes.ToString() + " Record(s) Updated.");
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
