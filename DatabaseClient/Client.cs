@@ -122,5 +122,14 @@ namespace DatabaseClient
 
             query.Show();
         }
+
+        // Send SQL Button
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SendSQL popup = new SendSQL();
+            popup.initialize(this);
+
+            popup.Show();
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace DatabaseClient
             }
         }
 
-        // Send Query (Build Query Tab)
+        // Send Query Button
         private void button2_Click(object sender, EventArgs e)
         {
             string error = "";
@@ -224,20 +224,6 @@ namespace DatabaseClient
 
                 condition.Show();
             }
-        }
-
-        // Send Query (SQL Tab)
-        private void button3_Click(object sender, EventArgs e)
-        {
-            m_SQLCommand = textBox1.Text;
-
-            if (m_SQLCommand != "")
-            {
-                if (m_Parent.executeSQL(m_SQLCommand))
-                    Close();
-            }
-            else
-                MessageBox.Show("You must specify an SQL Query first.");
         }
     }
 }

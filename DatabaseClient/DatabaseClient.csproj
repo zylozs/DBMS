@@ -64,6 +64,12 @@
     <Compile Include="QueryCondition.Designer.cs">
       <DependentUpon>QueryCondition.cs</DependentUpon>
     </Compile>
+    <Compile Include="SendSQL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendSQL.Designer.cs">
+      <DependentUpon>SendSQL.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Client.resx">
       <DependentUpon>Client.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QueryCondition.resx">
       <DependentUpon>QueryCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SendSQL.resx">
+      <DependentUpon>SendSQL.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
